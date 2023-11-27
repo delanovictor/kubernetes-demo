@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.6"
+        integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni"
+        crossorigin="anonymous"></script>
+
+    <title>Document</title>
+</head>
+
+<body class="bg-gray-800 text-gray-300 container m-5">
+
+    <div>
+        {{.PodName}} - {{.PodIP}}
+    </div>
+
+    <br>
+
+    <div>
+        <form hx-target="#messages-body" hx-swap="innerHTML" hx-post="/messages">
+            <div>
+                <label for="message">Adicionar Mensagem: </label>
+                <br>    
+                <input name="message"
+                    class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                    id="message" placeholder="Mensagem...">
+            </div>
+            <br>
+            <div>
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Enviar</button>
+            </div>
+        </form>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="relative overflow-x-auto">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Id
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Mensagem
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody 
+                id="messages-body"
+                hx-get="/messages"
+                hx-trigger="revealed"
+                hx-swap="innerHTML">
+
+
+            </tbody>
+            
+        </table>
+    </div>
+
+
+</body>
+
+</html>
